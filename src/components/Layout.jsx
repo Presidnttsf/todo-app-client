@@ -1,25 +1,45 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../features/auth/authSlice';
+import { logout, fetchUser } from '../features/auth/authSlice';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const Layout = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user, status, error, isAuthenticated } = useSelector((state) => state.auth);
-
+  const [authChecked, setAuthChecked] = useState(false);
+  console.log('Auth state:', { isAuthenticated, user, status });
   useEffect(() => {
-    if (!isAuthenticated && status !== 'loading') {
+    const token = localStorage.getItem('token');
+    
+    if (token) {
+      
+      if (!user) {
+        dispatch(fetchUser())
+          .unwrap()
+          .catch(() => {
+            localStorage.removeItem('token');
+            navigate('/login');
+          })
+          .finally(() => setAuthChecked(true));
+      } else {
+        setAuthChecked(true);
+      }
+    } else {
+      // No token - redirect to login
       navigate('/login');
+      setAuthChecked(true);
     }
-  }, [isAuthenticated, status, navigate]);
+  }, [dispatch, navigate, user]);
 
   const handleLogout = () => {
     dispatch(logout());
     navigate('/login');
   };
 
-
+  if (!authChecked || status === 'loading') {
+    return <div className="flex justify-center items-center h-screen">Loading...</div>;
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -29,11 +49,7 @@ const Layout = () => {
           Todo App
         </Link>
         <div className="flex items-center space-x-4">
-          {status === 'loading' ? (
-            <span>Loading...</span>
-          ) : error ? (
-            <span className="text-red-500">Error: {error}</span>
-          ) : user ? (
+          {user ? (
             <>
               <span className="text-gray-700">
                 Hello, {user.name || user.email || 'User'}

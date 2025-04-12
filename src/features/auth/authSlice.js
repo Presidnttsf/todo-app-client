@@ -45,7 +45,7 @@ const authSlice = createSlice({
   name: 'auth',
   initialState: {
     user: null,
-    token: null,
+    token: localStorage.getItem('token') || null,
     status: 'idle',
     error: null,
     isAuthenticated: false,
@@ -89,13 +89,14 @@ const authSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(fetchUser.fulfilled, (state, action) => {
+          state.user = action.payload;
+          state.isAuthenticated = true;
         state.status = 'succeeded';
-        state.user = action.payload;
-        state.isAuthenticated = true;
       })
       .addCase(fetchUser.rejected, (state) => {
         state.status = 'failed';
         state.isAuthenticated = false;
+        localStorage.removeItem('token');
       });
   },
 });

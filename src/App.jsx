@@ -27,8 +27,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-<Route path="/login" element={isAuthenticated ? <Navigate to="/" /> : <Login />} />
-        <Route path="/register" element={isAuthenticated ? <Navigate to="/" /> : <Register />} />
+<Route path="/login" element={isAuthenticated ? <Navigate to="/" replace /> : <Login />} />
+        <Route path="/register" element={isAuthenticated ? <Navigate to="/" replace /> : <Register />} />
         <Route element={<PrivateRoute />}>
           <Route path="/" element={<Layout />}>
             <Route index element={<TaskList />} />
