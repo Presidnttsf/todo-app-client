@@ -2,7 +2,6 @@
 
 # Full-Stack Todo List Application
 
-![Todo App Screenshot](./screenshot.png) <!-- Add a screenshot later -->
 
 A complete task management system with user authentication, CRUD operations, filtering, and pagination.
 
