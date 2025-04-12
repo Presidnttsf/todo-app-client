@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/tasks';
+const API_URL = 'https://todo-server-ddz5.onrender.com/tasks';
 
 const fetchTasks = async (page = 1, filters = {}) => {
   const token = localStorage.getItem('token');

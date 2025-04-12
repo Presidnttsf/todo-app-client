@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/auth';
+const API_URL = 'https://todo-server-ddz5.onrender.com/auth';
 
 const registerUser = async (userData) => {
   const response = await axios.post(`${API_URL}/register`, userData);
@@ -15,7 +15,7 @@ const loginUser = async (credentials) => {
     });
     return response;
   };
-  
+
 const getCurrentUser = async () => {
   const token = localStorage.getItem('token');
   const response = await axios.get(`${API_URL}/user`, {
