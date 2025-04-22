@@ -14,7 +14,7 @@ const Login = () => {
 const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const result = await dispatch(login({ email, password })).unwrap();
+      await dispatch(login({ email, password })).unwrap();
       
       navigate('/', { replace: true });
     } catch (err) {
