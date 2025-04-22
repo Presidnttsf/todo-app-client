@@ -1,12 +1,44 @@
 # React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Full-Stack Todo List Application
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+A complete task management system with user authentication, CRUD operations, filtering, and pagination.
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **User Authentication**
+  - Register with email/password
+  - Login/Logout functionality
+  - Protected routes
+  - JWT token-based authentication
+
+- **Task Management**
+  - Create, Read, Update, Delete tasks
+  - Task status tracking (PENDING/DONE)
+  - Due dates for tasks
+  - Search by task name
+  - Filter by status/date
+  - Pagination (10 tasks per page)
+
+- **Technical Stack**
+  - **Frontend**: React, Redux Toolkit, React Router, TailwindCSS
+  - **Backend**: Express.js, MongoDB, Mongoose
+  - **Deployment**: Render (Backend), Vercel/Netlify (Frontend)
+
+
+## Project Structure
+todo-app/
+├── client/ # Frontend (Vite + React)
+│ ├── public/
+│ ├── src/
+│ │ ├── app/ # Redux store
+│ │ ├── features/ # Redux slices
+│ │ ├── services/ # API services
+│ │ ├── components/ # Shared components
+│ │ ├── App.jsx # Root component
+│ │ └── main.jsx # Vite entry point
+│ ├── vite.config.js # Vite configuration
+│ └── package.json
+
+ Developed by Tauseef Akhtar
